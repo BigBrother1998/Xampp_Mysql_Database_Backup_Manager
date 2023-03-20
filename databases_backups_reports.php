@@ -54,41 +54,48 @@
 
 
 <div class="container-fluid mt-3">
- <form action="" method="post">
   <div class="row">
-    <div class="col-6">
+    <div class="col-7">
       <a type="button" href="add_database_to_list.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj bazę</a>
       <a type="button" href="mail_notifications.php" class="btn bg-gradient-info fs-6"><i class="fas fa-paper-plane fa-lg"></i> Konfiguracja maila</a>
       <a type="button" href="dashboard.php" class="btn bg-gradient-warning fs-6"><i class="fad fa-chart-network fa-lg"></i> Dashboard</a>
       <a type="button" href="backup_engine.php" class="btn bg-gradient-secondary fs-6"><i class="fas fa-sync-alt"></i> Natychmiastowa kopia</a>
     </div>
+    <div class="col-5 mt-2">
+      <?php backupPathName(); ?>
+      <h6 class="text-monospace">Ścieżka kopii "<?php echo $backup_path_name; ?>/htdocs/mysql_backup_manager/backups"
+      <?php if(isset($backup_path_name)) { ?>
+        <a href="edit_backup_path.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Edytuj ścieżkę"> <i class="fas fa-edit fa-lg"></i></a>
+      <?php } ?>
+      </h6>
+    </div>
   </div>
 </div>
 
 <div class="container mt-3">
-  <div class="card card-frame">
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-hover align-items-center databases_backup_history mb-0">
-          <thead>
-            <tr>
-              <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Nazwa bazy</th>
-              <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Status</th>
-              <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Data kopii</th>
-              <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Nazwa pliku</th>
-            </tr>
-          </thead>
-          <tbody>
+    <div class="card card-frame">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-items-center databases_backup_history mb-0">
+            <thead>
+              <tr>
+                <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Nazwa bazy</th>
+                <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Status</th>
+                <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Data kopii</th>
+                <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Nazwa pliku</th>
+              </tr>
+            </thead>
+            <tbody>
 
-            <?php
-              getallBackupReportList();
-            ?>
+              <?php
+                getallBackupReportList();
+              ?>
 
-          </tbody>
-        </table>
-      </div>
+            </tbody>
+          </table>
+        </div>
+    </div>
   </div>
- </form>
 </div>
 
 <script>

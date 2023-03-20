@@ -113,6 +113,108 @@ function getAllDatabasesList()
     }
 }
 
+function addBackupPath()
+{
+
+  global $connection;
+
+  if (isset($_POST['add_backup_path'])) {
+
+      $backup_path_name = $_POST['backup_path_name'];
+
+      $query_add_backup_path = "INSERT INTO databases_backup_path (backup_path_id , backup_path_name)";
+      $query_add_backup_path .= "VALUES ('1', '{$backup_path_name}')";
+
+      $add_backup_path = mysqli_query($connection, $query_add_backup_path);
+
+      ?>
+      <script>
+          $(document).ready(function () {
+              Swal.fire({
+              icon: 'success',
+              title: 'Operacja zakończona pomyślnie',
+              text: 'Twoja ścieżka została dodana.',
+              footer: '<a href="./dashboard.php">Powrót do panelu głównego</a>',
+              confirmButtonText: 'OK',
+              confirmButtonColor: 'rgb(249,164,81)',
+              })
+          })
+          </script>
+      <?php
+  }
+}
+
+function editBackupPath()
+{
+
+  global $connection;
+  global $backup_path_name;
+
+  $query_edit_backup_patch_name = "SELECT * FROM databases_backup_path WHERE backup_path_id = '1'";
+  $select_edit_backup_patch_name = mysqli_query($connection, $query_edit_backup_patch_name);
+  
+    while($row = mysqli_fetch_assoc($select_edit_backup_patch_name))
+    {
+      $backup_path_name = $row['backup_path_name'];
+    }
+
+    if(isset($_POST['edit_backup_path'])) {
+  
+      $backup_path_name = $_POST['backup_path_name'];
+
+      $query_update_backup_path_name = "UPDATE databases_backup_path SET ";
+      $query_update_backup_path_name .= "backup_path_name = '{$backup_path_name}', ";
+      $query_update_backup_path_name .= "backup_path_id mail_settings_id = '1'";
+
+      $update_backup_path_name = mysqli_query($connection, $query_update_backup_path_name);
+
+      ?>
+
+      <script>
+        $(document).ready(function () {
+              Swal.fire({
+              icon: 'success',
+              title: 'Operacja zakończona pomyślnie',
+              text: 'Twoja ścieżka została edytowana.',
+              footer: '<a href="./databases_backups_reports.php">Powrót do raportów</a>',
+              confirmButtonText: 'OK',
+              confirmButtonColor: 'rgb(249,164,81)',
+              })
+          })
+      </script>
+
+  <?php
+  }
+}
+
+function checkExistingBackupPath()
+{
+  global $connection;
+
+  $check_existing_backup_path = "SELECT * FROM databases_backup_path";
+  $select_check_existing_backup_path_query = mysqli_query($connection, $check_existing_backup_path);
+  $count_existing_backup_path_query = mysqli_num_rows($select_check_existing_backup_path_query);
+
+  if($count_existing_backup_path_query == 0 )
+  {
+    ?><a type="button" href="add_backup_path.php" class="btn bg-gradient-danger fs-6"><i class="fas fa-folder-tree"></i> Dodaj ścieżkę kopii</a><?php
+  }
+}
+
+function backupPathName()
+{
+  global $connection;
+  global $backup_path_name;
+
+  $query_backup_path_name = "SELECT * FROM databases_backup_path";
+  $select_query_backup_path_name = mysqli_query($connection, $query_backup_path_name);
+  
+    while($row = mysqli_fetch_assoc($select_query_backup_path_name))
+    {
+      $backup_path_name = $row['backup_path_name'];
+    }
+}
+
 function addDatabaseToList()
 {
   
@@ -257,6 +359,7 @@ function deleteDatabaseFromList()
 function getallDatabasestoBackup()
 {
   global $connection;
+  global $backup_path_name;
 
   $databases_list_query = "SELECT * FROM databases_list WHERE database_status = 'Aktywny'";
   $select_databases_list_query = mysqli_query($connection, $databases_list_query);
@@ -272,22 +375,24 @@ function getallDatabasestoBackup()
     $user = "$database_user";
     $password = "$database_password";
     $host = "$database_host";
+
+    backupPathName();
     
     // date_default_timezone_get("Europe/Warsaw");
     
-    if (!file_exists("C:/xampp/htdocs/mysql_backup_manager/backups")) {
-        mkdir("C:/xampp/htdocs/mysql_backup_manager/backups");
+    if (!file_exists("$backup_path_name/htdocs/mysql_backup_manager/backups")) {
+        mkdir("$backup_path_name/htdocs/mysql_backup_manager/backups");
     }
     
     foreach ($databases as $database) {
-        if (!file_exists(("C:/xampp/htdocs/mysql_backup_manager/backups/$database"))) {
-            mkdir("C:/xampp/htdocs/mysql_backup_manager/backups/$database");
+        if (!file_exists(("./backups/$database"))) {
+            mkdir("$backup_path_name/htdocs/mysql_backup_manager/backups/$database");
         }
     
         $filename = $database . "_" . date("d_m_Y") . "@" . date("H_i") . uniqid("@id_", false);
-        $folder = "C:/xampp/htdocs/mysql_backup_manager/backups/$database/" . $filename . ".sql";
+        $folder = "$backup_path_name/htdocs/mysql_backup_manager/backups/$database/" . $filename . ".sql";
     
-        exec("C:/xampp/mysql/bin/mysqldump --user={$user} --password={$password} --host={$host} {$database} --result-file={$folder}", $return);
+        exec("$backup_path_name/mysql/bin/mysqldump --user={$user} --password={$password} --host={$host} {$database} --result-file={$folder}", $return);
     }
 
       $date_now = date("Y-m-d H:i:s");
@@ -385,7 +490,6 @@ function checkExistingMailConfig()
   $select_check_existing_mail_config_query = mysqli_query($connection, $check_existing_mail_config_query);
   $count_existing_mail_config_query = mysqli_num_rows($select_check_existing_mail_config_query);
 
-  $count_existing_mail_config_query;
   if($count_existing_mail_config_query == 0 )
   {
     ?><a type="button" href="add_mail_configuration.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj konfigurację</a><?php

@@ -53,7 +53,8 @@
 <form action="" method="post">
 <div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
+      <?php checkExistingBackupPath(); ?>
       <a type="button" href="add_database_to_list.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj bazę</a>
       <a type="button" href="mail_notifications.php" class="btn bg-gradient-info fs-6"><i class="fas fa-paper-plane fa-lg"></i> Konfiguracja maila</a>
       <a type="button" href="databases_backups_reports.php" class="btn bg-gradient-warning fs-6"><i class="fas fa-ballot-check fa-lg"></i> Raporty</a>

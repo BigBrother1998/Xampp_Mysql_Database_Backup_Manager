@@ -11,7 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
     $name = "Backup Manager";  // Name of your website or yours
     $to = "$mail_settings_receiver";  // mail of reciever
 
-    $subject = "Raport kopi zapasowych baz MYSQL XAMPP($today_date)";
+    $subject = "Raport kopii zapasowych baz MYSQL XAMPP($today_date)";
 
     $body = 
     "<html lang='pl'>
