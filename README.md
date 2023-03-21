@@ -12,17 +12,17 @@
 
 1. Importujemy bazę danych w folderze "database",
 2. Wpisujemy adres programu w przeglądarce (np. `http://localhost/mysql_backup_manager/dashboard.php`)
-3. Dodajemy lokalizacje programu XAMPP (ścieżka początkowa np. "C:/xampp"),
+3. Dodajemy lokalizacje programu XAMPP (ścieżka początkowa np. `C:/xampp`),
 4. Dodajemy konfigurację mailową w celu powiadomień na poczcie,
 5. Dodajemy wybraną przez nas bazę.
 
-✋Konfigurację połączenia z z bazami systemu XAMPP można zmienić w pliku "database_connect" znajdującego się w folderze "includes" (jest ona na ustwieniach domyślnych).
+✋Konfigurację połączenia z z bazami systemu XAMPP można zmienić w pliku "database_connect" znajdującego się w folderze `includes` (jest ona na ustwieniach domyślnych).
 
 🤖Automatyczne kopie:
 
 1. Przechodzimy do harmonogramu zadań w systemie Windows i tworzymy nowe zadanie,
-2. Ustawiamy częstotliwość tworzenia kopii w zakładce "Wyzwalacze",
-3. Następnie w zakładce "Akcje"
+2. Ustawiamy częstotliwość tworzenia kopii w zakładce `Wyzwalacze`,
+3. Następnie w zakładce `Akcje`
 
    - Dodajemy ścieżkę `python.exe` (Program/Skrypt)
    - Dodajemy skrypt o nazwie `mail_notifications.py` (Dodaj argumenty)
