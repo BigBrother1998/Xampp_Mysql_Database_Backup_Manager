@@ -40,7 +40,7 @@
 
 💡Zmiana statusu bazy odbywa się za pomocą zaznaczenia checkboxa z daną pozycją ☑ a następnie wyboru z listy rozwijanej statusu kopii bazy. Całość zatwierdzamy przyciskiem `Zmień status bazy`.
 
-4. Raporty - lista historii wszystkich wykonanych kopi wraz z ich dokładną data wykonania, nazwą, statusem powodzenia oraz lokalizacją. Z tej pozycji istnieje możliwość zmiany lokalizacji systemu XAMPP,
+4. Raporty - lista historii wszystkich wykonanych kopi wraz z ich dokładną data wykonania, nazwą, statusem powodzenia oraz lokalizacją. Z tej pozycji istnieje możliwość zmiany lokalizacji ścieżki kopii systemu XAMPP,
 
 5. Natychmiastowa kopia - natychmiastowo tworzy wszystkie kopie ze statusem ✅Aktywny wraz z mini raportem dotyczącym przeprowadzonych kopii,
 
