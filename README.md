@@ -6,12 +6,12 @@
 
 - zainstalowany XAMPP,
 - zainstalowany Python,
-- edytor kodu (tylko w przypadku edycji konfiguracji bazy danych).
+- edytor kodu (tylko w przypadku edycji konfiguracji połączenia bazy danych programu).
 
 💿Instalacja:
 
 1. Importujemy bazę danych w folderze "database",
-2. Wpisujemy adres programu w przeglądarce (np. "http://localhost/mysql_backup_manager/dashboard.php")
+2. Wpisujemy adres programu w przeglądarce (np. `http://localhost/mysql_backup_manager/dashboard.php`)
 3. Dodajemy lokalizacje programu XAMPP (ścieżka początkowa np. "C:/xampp"),
 4. Dodajemy konfigurację mailową w celu powiadomień na poczcie,
 5. Dodajemy wybraną przez nas bazę.
@@ -23,9 +23,10 @@
 1. Przechodzimy do harmonogramu zadań w systemie Windows i tworzymy nowe zadanie,
 2. Ustawiamy częstotliwość tworzenia kopii w zakładce "Wyzwalacze",
 3. Następnie w zakładce "Akcje"
-   - Dodajemy ścieżkę "python.exe" (Program/Skrypt)
-   - Dodajemy skrypt o nazwie "mail_notifications.py" (Dodaj argumenty)
-   - Dodajemy scieżkę do folderu programu "auto_script_runner" (Rozpocznij w)
+
+   - Dodajemy ścieżkę `python.exe` (Program/Skrypt)
+   - Dodajemy skrypt o nazwie `mail_notifications.py` (Dodaj argumenty)
+   - Dodajemy scieżkę do folderu programu `auto_script_runner` (Rozpocznij w)
 
 🧾Instrukcja obsługi:
 
@@ -37,7 +38,7 @@
 
 💡Tylko bazy ze statusem ✅Aktywny otrzymają swoje kopie!
 
-💡Zmiana statusu bazy odbywa się za pomocą zaznaczenia checkboxa z daną pozycją ☑ a następnie wyboru z listy rozwijanej statusu kopii bazy. Całość zatwierdzamy przyciskiem "Zmień status bazy".
+💡Zmiana statusu bazy odbywa się za pomocą zaznaczenia checkboxa z daną pozycją ☑ a następnie wyboru z listy rozwijanej statusu kopii bazy. Całość zatwierdzamy przyciskiem `Zmień status bazy`.
 
 4. Raporty - lista historii wszystkich wykonanych kopi wraz z ich dokładną data wykonania, nazwą, statusem powodzenia oraz lokalizacją. Z tej pozycji istnieje możliwość zmiany lokalizacji systemu XAMPP,
 
