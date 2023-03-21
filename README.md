@@ -10,7 +10,7 @@
 
 💿Instalacja:
 
-1. Importujemy bazę danych w folderze "database",
+1. Tworzymy bazę o nazwie `database_backup_manager` w programie XAMPP i importujemy plik bazy danych o tej samej nazwie z folderu `database`,
 2. Wpisujemy adres programu w przeglądarce (np. `http://localhost/mysql_backup_manager/dashboard.php`)
 3. Dodajemy lokalizacje programu XAMPP (ścieżka początkowa np. `C:/xampp`),
 4. Dodajemy konfigurację mailową w celu powiadomień na poczcie,
