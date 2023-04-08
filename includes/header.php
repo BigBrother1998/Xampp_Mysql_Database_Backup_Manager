@@ -114,6 +114,10 @@ div.dt-datetime table td.selectable.selected button
 {
     background-color: #fd7e14 !important;
 }
+
+div.dataTables_wrapper div.dataTables_filter input {
+      width: 300px; 
+}
 </style>
 
 <!-- Połączenia z bazą oraz odczyt danych sesyjnych -->

@@ -92,7 +92,11 @@ function getAllDatabasesList()
         <span class='text-md font-weight-bold mb-0'><?php echo $database_user; ?></span>
       </td>
       <td class='align-middle text-center'>
-        <span class='text-md font-weight-bold mb-0'><?php echo $database_password; ?></span>
+        <?php if($database_password !== '') { ?>
+        <span class='text-md font-weight-bold mb-0'>********</span>
+        <?php }else { ?>
+          <span class='text-md font-weight-bold mb-0'>brak</span>
+        <?php } ?>
       </td>
       <td class='align-middle text-center'>
         <span class='text-md font-weight-bold mb-0'><?php echo $database_host; ?></span>

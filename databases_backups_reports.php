@@ -75,18 +75,20 @@
 <div class="container mt-3 mb-5">
     <div class="card card-frame">
       <div class="card-body">
-      <div class="col-md-6 col-sm-12 justify-content-center">
-        <h6 class="text-gradient text-warning text-center"><i class="far fa-calendar-alt fa-lg"></i> Zakres dat i godzin:</h6>
-          <table>
-            <tbody>
-              <td>Od:</td>
-              <td><input class="form-control " type="text" id="min" name="min" autocomplete="off"></td>
+        <div class="row mb-4">
+        <div class="col-md-7 col-sm-12 justify-content-center"></div>
+          <div class="col-md-5 col-sm-12 justify-content-center">
+            <h6 class="text-gradient text-warning text-center"><i class="far fa-calendar-alt fa-lg"></i> Zakres dat i godzin:</h6>
+              <table>
+                <tbody>
+                  <td>Od:</td>
+                  <td><input class="form-control " type="text" id="min" name="min" autocomplete="off"></td>
 
-              <td>Do:</td>
-              <td><input class="form-control" type="text" id="max" name="max" autocomplete="off"></td>
-            </tbody>
-          </table>
-               
+                  <td>Do:</td>
+                  <td><input class="form-control" type="text" id="max" name="max" autocomplete="off"></td>
+                </tbody>
+              </table>    
+            </div>
         </div>
         <div class="table-responsive">
           <table class="table table-hover align-items-center databases_backup_history mb-0">
