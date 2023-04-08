@@ -30,9 +30,7 @@
                       Backup Manager
                     </h5>
                     <?php
-
-                    checkConnectionWithDatabasesList();
-
+                      checkConnectionWithDatabasesList();
                     ?>
                   </div>
                 </div>

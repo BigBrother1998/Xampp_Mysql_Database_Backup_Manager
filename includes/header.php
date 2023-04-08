@@ -118,7 +118,7 @@ div.dt-datetime table td.selectable.selected button
 
 <!-- Połączenia z bazą oraz odczyt danych sesyjnych -->
 <?php 
-    if (strpos($url,'controllers') == false) {
+    if(strpos($url,'controllers') == false) {
       include "includes/database_connect.php"; 
     }else {
       include "../includes/database_connect.php"; 

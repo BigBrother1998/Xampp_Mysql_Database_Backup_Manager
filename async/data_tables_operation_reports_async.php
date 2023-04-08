@@ -1,5 +1,7 @@
 <?php
 
+include "../includes/database_connect.php";
+
     $columnsPerTable = [
  
         // 1 //
@@ -73,10 +75,10 @@
 
     $dbpass = [
         'databases_operation_reports' => [
-            'user' => 'root',
-            'pass' => '',
+            'user' => $database_user,
+            'pass' => $database_password,
             'db'   => 'database_backup_manager',
-            'host' => 'localhost'
+            'host' => $database_host
         ]
 
     ];
