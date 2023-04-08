@@ -12,13 +12,13 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<?php include "includes/header.php" ?>
-<?php include "includes/functions.php" ?>
+<?php include "../includes/header.php" ?>
+<?php include "../includes/functions.php" ?>
 
 <!-- MAIN PAGE -->
 <main class="main-content position-relative border-radius-lg">
 
-        <?php editDatabaseFromList(); ?>
+        <?php addDatabaseToList(); ?>
 
       <div class="d-flex justify-content-center mt-10">
         <div class="col-lg-6 mt-4 flex">
@@ -27,8 +27,8 @@
 
             <div class="row g-0">
                 <div class="col-sm-6 col-md-8">
-                  <h2 class="mb-1">Edytuj bazę danych</h2>
-                  <p class="text-yellow font-weight-bold">Edytuj bazę danych do listy</p>
+                  <h2 class="mb-1">Dodaj bazę danych</h2>
+                  <p class="text-yellow font-weight-bold">Dodaj bazę danych do listy</p>
             </div>
 
             <form action="" method="post" enctype="multipart/form-data">
@@ -36,8 +36,7 @@
                     <div class="col-6 col-md-6">
                         <div class="form-group">
                             <label for="database_name" class="form-control-label">Nazwa baza danych</label>
-                            <select class="form-control select-customer" name="database_name" required>
-                            <option value="<?php echo $database_name; ?>"><?php echo $database_name; ?> (aktualnie wybrany)</option>
+                                <select class="form-control select-customer" name="database_name" required>
 
                                     <?php
 
@@ -52,36 +51,36 @@
                                         }
 
                                     ?>
-                            </select>
+                                </select>
                         </div>
                     </div>
                     <div class="col-6 col-md-6">
                         <div class="form-group">
                             <label for="database_user" class="form-control-label">Użytkownik</label>
-                            <input class="form-control" type="text" name="database_user"  value="<?php echo $database_user; ?>" required>
+                            <input class="form-control" type="text" name="database_user" required>
                         </div>
                     </div>
                     <div class="col-6 col-md-6">
                         <div class="form-group">
                             <label for="database_password" class="form-control-label">Hasło</label>
-                            <input class="form-control" type="password" name="database_password" value="<?php echo $database_password; ?>">
+                            <input class="form-control" type="password" name="database_password">
                         </div>
                     </div>
                     <div class="col-6 col-md-6">
                         <div class="form-group">
                             <label for="database_host" class="form-control-label">Host</label>
-                            <input class="form-control" type="text" name="database_host"  value="<?php echo $database_host; ?>"  required>
+                            <input class="form-control" type="text" name="database_host" required>
                         </div>
                     </div>
 
                 </div>
 
                     <div class="col-12 text-center mt-2">
-                        <button class="btn bg-gradient-warning text-white btn-icon" name="edit_database" type="submit">
-                            <span><i class="fas fa-marker"></i></span>
-                            <span>Edytuj bazę danych</span>
+                        <button class="btn bg-gradient-warning text-white btn-icon" name="add_database" type="submit">
+                            <span><i class="fas fa-plus"></i></span>
+                            <span>Dodaj bazę danych</span>
                         </button>
-                        <a class="btn bg-gradient-warning text-white btn-icon" href="./dashboard.php">
+                        <a class="btn bg-gradient-warning text-white btn-icon" href="../dashboard.php">
                             <span><i class="fas fa-arrow-alt-left"></i></span>
                             <span>Powrót</span>
                         </a>
@@ -89,9 +88,10 @@
 
                 </form>
 
-                
-                </div>
-               
+               <h6 class="text-monospace">*W przypaku bazy danych na serwerze lokalnym w pozycji Host wystarczy wpisać <b class="text-info">"localhost"</b></h6>
+               <h6 class="text-monospace">*W przypadku braku hasła pole pozostawiamy <b class="text-info">puste</b>.</h6>
+
+                    </div>
                 </div>
             </div>  
         </div>

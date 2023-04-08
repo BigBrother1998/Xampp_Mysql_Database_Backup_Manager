@@ -77,7 +77,7 @@
                             </div>
                             <?php if(isset($mail_settings_host_address)) { ?>
                             <div class="col-1 mb-2">
-                                <a href="edit_mail_configuration.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Edytuj konfigurację"><i class="fas fa-edit fa-2x"></i></a>
+                                <a href="controllers/edit_mail_configuration.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Edytuj konfigurację"><i class="fas fa-edit fa-2x"></i></a>
                             </div>
                             <?php } ?>
                             <hr>

@@ -105,8 +105,8 @@ function getAllDatabasesList()
       <?php } ?>
       </td>
       <td class='align-middle text-center'>
-        <span><a href='edit_database_from_list.php?database_id=<?php echo $database_id ?>' class='text-md font-weight-bold mb-0 p-1'><i class='fas fa-marker' style='color:#f9a451'></i></span>
-        <span><a href='dashboard.php?delete_database=<?php echo $database_id ?>' class='text-md font-weight-bold mb-0 p-1 delete-database-from-list-alert'><i class='fas fa-trash' style='color:#6c757d'></i></a></span>
+        <span><a href='controllers/edit_database_from_list.php?database_id=<?php echo $database_id ?>' class='text-md font-weight-bold mb-0 p-1'><i class='fas fa-marker' style='color:#f9a451'></i></span>
+        <span><a href='controllers/delete_database_from_list.php?database_id=<?php echo $database_id ?>' class='text-md font-weight-bold mb-0 p-1'><i class='fas fa-trash' style='color:#6c757d'></i></a></span>
       </td>
     </tr>
     <?php
@@ -134,7 +134,7 @@ function addBackupPath()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Twoja ścieżka została dodana.',
-              footer: '<a href="./dashboard.php">Powrót do panelu głównego</a>',
+              footer: '<a href="../dashboard.php">Powrót do panelu głównego</a>',
               confirmButtonText: 'OK',
               confirmButtonColor: 'rgb(249,164,81)',
               })
@@ -176,7 +176,7 @@ function editBackupPath()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Twoja ścieżka została edytowana.',
-              footer: '<a href="./databases_backups_reports.php">Powrót do raportów</a>',
+              footer: '<a href="../databases_backups_reports.php">Powrót do raportów</a>',
               confirmButtonText: 'OK',
               confirmButtonColor: 'rgb(249,164,81)',
               })
@@ -197,7 +197,7 @@ function checkExistingBackupPath()
 
   if($count_existing_backup_path_query == 0 )
   {
-    ?><a type="button" href="add_backup_path.php" class="btn bg-gradient-danger fs-6"><i class="fas fa-folder-tree"></i> Dodaj ścieżkę kopii</a><?php
+    ?><a type="button" href="controllers/add_backup_path.php" class="btn bg-gradient-danger fs-6"><i class="fas fa-folder-tree"></i> Dodaj ścieżkę kopii</a><?php
   }
 }
 
@@ -238,7 +238,7 @@ function addDatabaseToList()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Baza została dodana do listy.',
-              footer: '<a href="./dashboard.php">Powrót do głównego panelu</a>',
+              footer: '<a href="../dashboard.php">Powrót do głównego panelu</a>',
               confirmButtonText: 'Dodaj kolejną bazę danych',
               confirmButtonColor: 'rgb(249,164,81)',
               })
@@ -297,7 +297,7 @@ function editDatabaseFromList()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Twoja baza danych została edytowana.',
-              footer: '<a href="./dashboard.php">Powrót do głównego panelu</a>',
+              footer: '<a href="../dashboard.php">Powrót do głównego panelu</a>',
               confirmButtonText: 'Edytuj dalej bazę danych bazę danych',
               confirmButtonColor: 'rgb(249,164,81)',
               })
@@ -311,48 +311,42 @@ function editDatabaseFromList()
 function deleteDatabaseFromList() 
 {
   global $connection;
+  global $database_name;
+  global $database_status;
 
-  if(isset($_GET['delete_database']))
+  if(isset($_GET['database_id'])) {
+      $get_database_id = $_GET['database_id'];
+  }
 
-  {
-    $get_database_id = $_GET['delete_database'];
+    $query_delete_database_from_list = "SELECT * FROM databases_list WHERE database_id = '$get_database_id'";
+    $select_delete_database_from_list = mysqli_query($connection, $query_delete_database_from_list);
+    
+      while($row = mysqli_fetch_assoc($select_delete_database_from_list))
+      {
+        $database_name = $row['database_name'];
+        $database_status = $row['database_status'];
+      }
+  
+    if(isset($_POST['delete_database'])) {
   
     $query_delete_database_from_list_member = "DELETE FROM databases_list WHERE database_id = '$get_database_id'";
     $select_delete_database_from_list_member = mysqli_query($connection, $query_delete_database_from_list_member);
   ?>
-    <script>
-      $('.delete-database-from-list-alert').on('click', function (e) {
-          e.preventDefault();
-          const href = $(this).attr('href');
-          Swal.fire({
-              title: 'Czy jesteś pewny?',
-              text: "Zmiany, które podejmiesz będą niodwracalne",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#5cb85c',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Tak, usuń bazę z listy!',
-              cancelButtonText: "Anuluj"
-          }).then((result) => {
-              if (result.isConfirmed) {
-                  Swal.fire({
-                    title: 'Zmieniono',
-                    text: "Twoja baza została usunięta z listy",
-                    icon: 'success',
-                    confirmButtonColor: 'rgb(249,164,81)',
-                  })
-                      .then((result) => {
-                        window.location.href = 'dashboard.php';
-                      })
-              }
-  
+
+     <script>
+        $(document).ready(function () {
+              Swal.fire({
+              icon: 'success',
+              title: 'Operacja zakończona pomyślnie',
+              text: 'Twoja baza danych została usunięta.',
+              footer: '<a href="../dashboard.php">Powrót do głównego panelu</a>',
+              confirmButtonColor: 'rgb(249,164,81)',
+              })
           })
-  
-      })
-  </script>
+      </script>
 
   <?php
-      }
+  }
 }
 
 
@@ -414,51 +408,6 @@ function getallDatabasestoBackup()
 
 }
 
-function getallBackupReportList()
-{
-
-  global $connection;
-
-  $backup_list_query = "SELECT * FROM databases_operation_reports";
-  $select_backup_list_query = mysqli_query($connection, $backup_list_query);
-
-  while($row = mysqli_fetch_assoc($select_backup_list_query))
-  {
-    $datatabase_operation_database_name = $row['datatabase_operation_database_name'];
-    $datatabase_operation_status = $row['datatabase_operation_status'];
-    $datatabase_operation_date = $row['datatabase_operation_date'];
-    $datatabase_operation_filename = $row['datatabase_operation_filename'];
-  
-  ?>
-  <tr>
-    <td class='align-middle text-center'>
-        <span class='text-md font-weight-bold mb-0'><?php echo $datatabase_operation_database_name; ?></span>
-    </td>
-    <td class='align-middle text-center'>
-      <?php if($datatabase_operation_status == 'Powodzenie operacji') { ?>
-        <span class='text-md font-weight-bold mb-0 text-success'><i class="far fa-thumbs-up"></i> <?php echo $datatabase_operation_status; ?></span>
-      <?php } else if($datatabase_operation_status == 'Niepowodzenie operacji') { ?>
-        <span class='text-md font-weight-bold mb-0 text-danger'><i class="far fa-thumbs-down"></i> <?php echo $datatabase_operation_status; ?></span>
-      <?php } ?>
-    </td>
-    <td class='align-middle text-center'>
-        <span class='text-md font-weight-bold mb-0'><?php echo $datatabase_operation_date; ?></span>
-    </td>
-    <td class='align-middle text-center'>
-    <?php if(!empty($datatabase_operation_filename)) { ?>
-        <span class='text-md font-weight-bold mb-0'><?php echo $datatabase_operation_filename; ?>.sql</span>
-    <?php } else { ?>
-        <span class='text-md font-weight-bold mb-0 text-danger'><i class="fas fa-ban"></i> BRAK PLIKU</span>
-    <?php } ?>
-
-    </td>
-
-  </tr>
-
-  <?php
-  }
-}
-
 function mailConfig()
 {
   global $connection;
@@ -492,7 +441,7 @@ function checkExistingMailConfig()
 
   if($count_existing_mail_config_query == 0 )
   {
-    ?><a type="button" href="add_mail_configuration.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj konfigurację</a><?php
+    ?><a type="button" href="controllers/add_mail_configuration.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj konfigurację</a><?php
   }
 
 
@@ -523,7 +472,7 @@ function addMailConfig()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Twoja konfiguracja została dodana.',
-              footer: '<a href="./mail_notifications.php">Powrót do konfiguracji maila</a>',
+              footer: '<a href="../mail_notifications.php">Powrót do konfiguracji maila</a>',
               confirmButtonText: 'OK',
               confirmButtonColor: 'rgb(249,164,81)',
               })
@@ -581,7 +530,7 @@ function editMailConfig()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Twoja konfiguracja została edytowana.',
-              footer: '<a href="./mail_notifications.php">Powrót do konfiguracji maila</a>',
+              footer: '<a href="../mail_notifications.php">Powrót do konfiguracji maila</a>',
               confirmButtonText: 'OK',
               confirmButtonColor: 'rgb(249,164,81)',
               })

@@ -56,25 +56,38 @@
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-7">
-      <a type="button" href="add_database_to_list.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj bazę</a>
+      <a type="button" href="controllers/add_database_to_list.php" class="btn bg-gradient-success fs-6"><i class="fas fa-plus-circle fa-lg"></i> Dodaj bazę</a>
       <a type="button" href="mail_notifications.php" class="btn bg-gradient-info fs-6"><i class="fas fa-paper-plane fa-lg"></i> Konfiguracja maila</a>
       <a type="button" href="dashboard.php" class="btn bg-gradient-warning fs-6"><i class="fad fa-chart-network fa-lg"></i> Dashboard</a>
       <a type="button" href="backup_engine.php" class="btn bg-gradient-secondary fs-6"><i class="fas fa-sync-alt"></i> Natychmiastowa kopia</a>
     </div>
     <div class="col-5 mt-2">
       <?php backupPathName(); ?>
-      <h6 class="text-monospace">Ścieżka kopii "<?php echo $backup_path_name; ?>/htdocs/mysql_backup_manager/backups"
+      <h6 class="text-monospace"><i class="fas fa-folder-open"></i> Ścieżka kopii "<?php echo $backup_path_name; ?>/htdocs/mysql_backup_manager/backups"
       <?php if(isset($backup_path_name)) { ?>
-        <a href="edit_backup_path.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Edytuj ścieżkę"> <i class="fas fa-edit fa-lg"></i></a>
+        <a href="controllers/edit_backup_path.php" data-bs-toggle="tooltip" data-bs-placement="top" title="Edytuj ścieżkę"> <i class="fas fa-edit fa-lg"></i></a>
       <?php } ?>
       </h6>
     </div>
   </div>
 </div>
 
-<div class="container mt-3">
+<div class="container mt-3 mb-5">
     <div class="card card-frame">
       <div class="card-body">
+      <div class="col-md-6 col-sm-12 justify-content-center">
+        <h6 class="text-gradient text-warning text-center"><i class="far fa-calendar-alt fa-lg"></i> Zakres dat i godzin:</h6>
+          <table>
+            <tbody>
+              <td>Od:</td>
+              <td><input class="form-control " type="text" id="min" name="min" autocomplete="off"></td>
+
+              <td>Do:</td>
+              <td><input class="form-control" type="text" id="max" name="max" autocomplete="off"></td>
+            </tbody>
+          </table>
+               
+        </div>
         <div class="table-responsive">
           <table class="table table-hover align-items-center databases_backup_history mb-0">
             <thead>
@@ -85,12 +98,7 @@
                 <th class="text-center text-uppercase text-dark fs-6 font-weight-bolder opacity-7">Nazwa pliku</th>
               </tr>
             </thead>
-            <tbody>
-
-              <?php
-                getallBackupReportList();
-              ?>
-
+            <tbody class='align-middle text-center text-md mb-0'>
             </tbody>
           </table>
         </div>
@@ -98,34 +106,19 @@
   </div>
 </div>
 
+<script type="text/javascript" src="assets/js/core/async_data_tables_operation_reports.js"></script>
+
 <script>
-    $(document).each(function () {
-        $('.databases_backup_history').DataTable({           
-            "dom": '<brfti>',
-            "aLengthMenu": [
-                [-1],
-                ["Wszystko"]
-            ],
-            "order": [[2, 'desc']],
-            "scrollY": 500,
-            "scrollCollapse": true,
-            "stateSave": false,
-            "language": {
-                "search": "Wyszukaj",
-                "lengthMenu": "Pokaż _MENU_ ",
-                "zeroRecords": "Nic nie znaleziono. Przepraszamy <i class='far fa-frown'></i>",
-                "info": "Pokaż stronę _PAGE_ z _PAGES_",
-                "infoEmpty": "Nie znaleziono z",
-                "paginate": {
-                    "next": ">",
-                    "previous": "<",
-                },
-                "infoFiltered": "(Przeszukano z _MAX_ rekordów)",
-            }
-        
-        });
+    $(document).ready(function() {
+      renderTable({
+        database_table_name: "databases_operation_reports",
+        columns_set: "databases_operation_reports_list",
+      })
     });
-</script>
+
+    TableDateFilter();
+    DateFormTranslate();
+  </script>
 
 </body>
 

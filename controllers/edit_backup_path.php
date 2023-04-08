@@ -12,8 +12,8 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
-<?php include "includes/header.php" ?>
-<?php include "includes/functions.php" ?>
+<?php include "../includes/header.php" ?>
+<?php include "../includes/functions.php" ?>
 
 <!-- MAIN PAGE -->
 <main class="main-content position-relative border-radius-lg">
@@ -48,7 +48,7 @@
                             <span><i class="fas fa-marker"></i></span>
                             <span>Edytuj ścieżkę</span>
                         </button>
-                        <a class="btn bg-gradient-warning text-white btn-icon" href="./databases_backups_reports.php">
+                        <a class="btn bg-gradient-warning text-white btn-icon" href="../databases_backups_reports.php">
                             <span><i class="fas fa-arrow-alt-left"></i></span>
                             <span>Powrót</span>
                         </a>
