@@ -339,6 +339,7 @@ function deleteDatabaseFromList()
               icon: 'success',
               title: 'Operacja zakończona pomyślnie',
               text: 'Twoja baza danych została usunięta.',
+              showConfirmButton: false,
               footer: '<a href="../dashboard.php">Powrót do głównego panelu</a>',
               confirmButtonColor: 'rgb(249,164,81)',
               })
